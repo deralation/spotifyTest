@@ -36,22 +36,11 @@ define('LOGSPATH',ROOTPATH.'../logs/');
 define('SESSIONPATH',ROOTPATH.'../sessions');
 define('VENDORPATH',ROOTPATH.'vendor/');
 define('LIBRARIESPATH',ROOTPATH."libraries/");
-define('CMKINCLUDES',ROOTPATH.'panel/includes/');
-define('INCLUDESPATH',ROOTPATH.'views/includes/');
 define('LOCALEPATH',ROOTPATH.'locale/');
 define('FILESPATH',ROOTPATH."files/");
-define('MEDIAPATH',ROOTPATH."files/media/");
 define('MODULE','SITE');
 
-define('CMKURL',ROOTURL."panel/");
-define('PANELURL',ROOTURL."panel/");
 define('LIBRARIESURL',ROOTURL."libraries/");
-define('FILESURL',ROOTURL."files/");
-//define('MEDIAURL',ROOTURL."files/media/");
-define('STATICSURL',ROOTURL."static/");
-define('STYLESURL',ROOTURL."static/styles/");
-define('MEDIAURL',"http://media.cdn.driveyoyo.com/");
-//define('MEDIAURL',"http://d29dyt32i0m67n.cloudfront.net/");
 
 define('RECAPTCHASITEKEY','6LfFFSkTAAAAANL3RS_uQJ0Hghtvibnbf5BH-x--');
 define('RECAPTCHASECRETKEY','6LfFFSkTAAAAALmdGpsjsorh5Tumvrh9zAgc1zQr');
@@ -115,62 +104,21 @@ if(ENV!="LOCAL") {
 	$catcher->start();
 }
 
-// Region
-//$region = new Region();
-//$region->setparam("simulateRegion","BH");
-//$visitorRegion = $region->determine($_SERVER["SERVER_NAME"]);
-//echo $visitorRegion; exit();
-
 // Utilities
-//include CLASSPATH.'Utility.php';
 $utility = new Utility();
 $utility->setDebug(false); 
 
 $setting = new Setting(); 
 
-//echo "testtt3";
-
 // MySQL Connection
-//include CLASSPATH.'MySQL.php';
 $database = new MySQL();
-//$database->setDebug(true);
 $database->setHost(MYSQLHOST);
 $database->setUser(MYSQLUSER);
 $database->setPassword(MYSQLPASS);
 $database->setDatabase(MYSQLDB);
 
-// Deploy
-$deploy = new Deploy();
-
 // Activity
 $activity = new Activity();
-
-// Translation
-$locale = "en_US";  // the locale you want
-$localeDomain = "default"; // the domain you're using, this is the .PO/.MO file name without the extension
-$language = "tr_TR";
-setlocale(LC_ALL, $locale); // activate the locale setting
-setlocale(LC_TIME, $locale);
-setlocale(LC_MESSAGES, $language);
-putenv("LANG=$language");
-
-/*// Get Version
-$localeVersion = file_get_contents(Deploy::$localeVersionTracker);
-if($localeVersion===false) {
-	// Use Original MOs
-	foreach(Deploy::$localeDomains as $localeDomain) {
-		bindtextdomain($localeDomain,LOCALEPATH.$language."/LC_MESSAGES/".$localeDomain.".mo");
-		bind_textdomain_codeset($localeDomain,'UTF-8');
-	}
-} else {
-	// Use Versioned MOs
-	foreach(Deploy::$localeDomains as $localeDomain) {
-		$result = bindtextdomain($localeDomain,LOCALEPATH."/cached/v_".$localeVersion."/");
-		bind_textdomain_codeset($localeDomain,'UTF-8');
-	}
-}
-$result = textdomain("default");*/
-
 
 // Manuel Classes Loader
 function useClasses($classes) {
