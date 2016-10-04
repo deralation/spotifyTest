@@ -130,8 +130,7 @@ function useClasses($classes) {
 
 // CMK Access
 $scriptPath = explode("/",str_replace(ROOTPATH,"",$_SERVER["SCRIPT_FILENAME"]));
-//echo "hoppa2"; exit();
-//var_dump($scriptPath); exit();
+
 if(count($scriptPath)>0) {
 	if($scriptPath[0]=="panel")
 		textdomain("panel");
@@ -142,8 +141,5 @@ if(count($scriptPath)>0) {
 	if($scriptPath[0]=="panel" && $scriptPath[2]!="signin.php" && $user->signedIn==false)
 		header("Location: ".CMKURL."users/signin.php?redirect=".urlencode($_SERVER["REQUEST_URI"]));
 }
-
-
-//throw new ExceptionLogger("check one");
 
 ?>
