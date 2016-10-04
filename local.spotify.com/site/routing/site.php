@@ -15,113 +15,6 @@ try {
 	    return VIEWSPATH.'homepage/homepage.php';
 	});
 
-	// Blogs
-	$router->group(['prefix'=>'blog'], function($router){
-		$router->any(['/', 'yenilikler'], function(){
-			return VIEWSPATH.'blogs/posts.php';
-		});
-		$router->any(['/{alias:c},{post:i}','yenilik'], function($alias,$post){
-			return array(VIEWSPATH.'blogs/post.php',get_defined_vars());	
-		});
-	});
-
-	// Campaigns
-	$router->group(['prefix'=>'firsatlar'], function($router){
-		$router->any(['/', 'firsatlar_kampanyalar'], function(){
-			return VIEWSPATH.'campaigns/campaigns.php';
-		});
-		$router->any(['/{alias:c},{campaign:i}','kampanya'], function($alias,$campaign){
-			return array(VIEWSPATH.'campaigns/campaign.php',get_defined_vars());	
-		});		
-	});
-	
-	// Reservations
-	$router->group(['prefix' => 'rezervasyonlar'], function($router){
-		$router->any('/{reservation:i}', function($member){
-		    header("Location: https://driveyoyo.com/uye/rezervasyonlar");
-		    exit();
-		});
-		$router->any('/{reservation:a}/yorum', function($member){
-			return array(VIEWSPATH.'reservations/feedback.php', get_defined_vars());
-		});
-	});
-
-	// Vehicles
-	$router->group(['prefix' => 'araclar'], function($router){
-		$router->any(['/{alias:c}--{vehicle:i}','araclar'],function($alias,$vehicle){
-			return array(VIEWSPATH.'vehicles/vehicle.php',get_defined_vars());
-		});
-	});
-
-	// Members
-	$router->group(['prefix' => 'uye'], function($router){
-		$router->any(['/', 'uye_profil'], function(){
-		    return VIEWSPATH.'members/member.php';
-		});
-		$router->any(['/giris', 'uye_giris'], function(){
-		    return VIEWSPATH.'members/signin.php';
-		});
-		$router->any(['/cikis', 'uye_cikis'], function(){
-		    return VIEWSPATH.'members/signout.php';
-		});
-		$router->any(['/kayit', 'uye_kayit'], function(){
-		    return VIEWSPATH.'members/signup.php';
-		});
-		$router->any('/kayit/2', function(){
-		    return VIEWSPATH.'members/signup-2.php';
-		});
-		$router->any('/kayit/3', function(){
-		    return VIEWSPATH.'members/signup-3.php';
-		});
-		$router->any('/kayit/tamam', function(){
-		    return VIEWSPATH.'members/welcome.php';
-		});
-		$router->any('/davet', function(){
-		    return VIEWSPATH.'members/invite.php';
-		});
-		$router->any('/davet/{member:i}', function($member){
-		    return array(VIEWSPATH.'members/invited.php',get_defined_vars());
-		});
-		$router->any('/duzeltme', function(){
-		    return ROOTPATH.'custom/members/validation.php';
-		});
-		$router->any('/rezervasyonlar', function(){
-			return VIEWSPATH.'members/reservations.php';
-		});
-		$router->any('/rezervasyonlar/gecmis', function(){
-			return VIEWSPATH.'members/reservationsHistory.php';
-		});
-		$router->any('/rezervasyonlar/{reservation:i}/tarih', function($reservation){
-			return array(VIEWSPATH.'reservations/reschedule.php',get_defined_vars());
-		});
-		$router->any('/rezervasyonlar/{reservation:i}/iptal', function($reservation){
-			return array(VIEWSPATH.'reservations/cancel.php',get_defined_vars());
-		});
-		$router->any('/hesap', function(){
-			return VIEWSPATH.'members/account.php';
-		});
-		$router->any('/odeme', function(){
-			return VIEWSPATH.'members/finance.php';
-		});
-		$router->any('/odeme/krediler', function(){
-			return VIEWSPATH.'members/credits.php';
-		});
-		$router->any('/odeme/gecmis', function(){
-			return VIEWSPATH.'members/payments.php';
-		});
-		$router->any('/odeme/fis/{payment:i}',function($payment){
-			return array(VIEWSPATH.'members/invoice.php',get_defined_vars());
-		});		
-		$router->any('/destek', function(){
-			return VIEWSPATH.'members/support.php';
-		});
-		$router->any(['/yenileme', 'uye_yenileme'], function(){
-		    return VIEWSPATH.'members/renew.php';
-		});
-		$router->any(['/iptal', 'uye_iptal'], function(){
-		    return VIEWSPATH.'members/cancel.php';
-		});
-	});
 
 	// Surveys
 	$router->group(['prefix' => 'anketler'], function($router){
@@ -133,16 +26,6 @@ try {
 		});
 		$router->any(['/hyundai', 'custom_survey_yaris'], function(){
 		    return ROOTPATH.'custom/hyundai/survey.php';
-		});
-	});
-
-	// Prepaid
-	$router->group(['prefix' => 'ye-ye'], function($router){
-		$router->any(['/', 'prepaid'], function(){
-		    return VIEWSPATH.'prepaid/prepaid.php';
-		});
-		$router->any(['/al', 'prepaid_buy'], function(){
-		    return VIEWSPATH.'members/prepaid.php';
 		});
 	});
 
