@@ -18,5 +18,20 @@ $myPlaylists = $api->getUserPlaylists($me[0]["spotifyID"],array('limit'=>2));
 
 var_dump($myPlaylists); exit();
 
+$playlists = $api->getUserPlaylists($array["id"], array(
+    'limit' => 5
+));
 
+$songLists = json_decode(json_encode($playlists), True);
+$lists = array();
+
+if(count($songLists)>0){
+    foreach ($songLists["items"] as $key) {
+        $lists["listID"] = $key["id"];
+        $lists["name"] = $key["name"];
+
+        if($playlist->add($lists))
+            echo "Spotify Users Playlists are added to Database.";
+    }
+}
 ?>

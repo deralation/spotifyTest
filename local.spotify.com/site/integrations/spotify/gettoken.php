@@ -4,14 +4,12 @@ require_once(__DIR__.'/../../config/config.php');
 $session = new SpotifyWebAPI\Session(SPOTIFYCLIENTID, SPOTIFYCLIENTSECRET, 'http://local.spotify.com/integrations/spotify/gettoken.php');
 
 $api = new SpotifyWebAPI\SpotifyWebAPI();
-$user = new User();
-$playlist = new Playlist();
-$track = new Track();
 
 if (isset($_GET['code'])) {
     $session->requestAccessToken($_GET['code']);
     $accessToken = $session->getAccessToken();
     $api->setAccessToken($session->getAccessToken());
+    var_dump($api); exit();
 } else {
     header('Location: ' . $session->getAuthorizeUrl(array(
         'scope' => array(
@@ -24,52 +22,22 @@ if (isset($_GET['code'])) {
     die();
 }
 
-$me = $api->me();
-$array = json_decode(json_encode($me), True);
-$array["accessToken"] = $accessToken; 
 
-$member = array();
 
-if(isset($array)){
-    $member["spotifyID"] = $array["id"];
-    $member["displayName"] = $array["display_name"];
-    $member["accessToken"] = $array["accessToken"];
+/*$tracksRequest = $api->getUserPlaylistTracks($array["id"], $key["id"]);
+$playlistTracks = json_decode(json_encode($tracksRequest), True);
 
-    if($user->add($member))
-        echo "Spotify User added to Database.";
-}
+$tracks = array();
 
-$playlists = $api->getUserPlaylists($array["id"], array(
-    'limit' => 5
-));
+foreach ($tracksRequest->items as $value) {
+$value = $value->track;
 
-$songLists = json_decode(json_encode($playlists), True);
-$lists = array();
+$tracks["trackName"] = '<a href="' . $value->external_urls->spotify . '">' . $value->name . '</a> <br>';
+$tracks["playlistID"] = $key["id"];
 
-if(count($songLists)>0){
-    foreach ($songLists["items"] as $key) {
-        $lists["listID"] = $key["id"];
-        $lists["name"] = $key["name"];
-
-        if($playlist->add($lists))
-            echo "Spotify Users Playlists are added to Database.";
-
-         $tracksRequest = $api->getUserPlaylistTracks($array["id"], $key["id"]);
-         $playlistTracks = json_decode(json_encode($tracksRequest), True);
-
-         $tracks = array();
-
-         foreach ($tracksRequest->items as $value) {
-            $value = $value->track;
-
-            $tracks["trackName"] = '<a href="' . $value->external_urls->spotify . '">' . $value->name . '</a> <br>';
-            $tracks["playlistID"] = $key["id"];
-
-            if($track->add($tracks))
-                echo "Spotify Playlists Track added to Databases.";
-         }
-    }    
-}
+if($track->add($tracks))
+    echo "Spotify Playlists Track added to Databases.";
+}*/
 
 // Request a access token using the code from Spotify
 /*$session->requestAccessToken($_GET['code']);
