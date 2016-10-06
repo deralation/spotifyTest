@@ -28,10 +28,10 @@ class Playlist extends Thing {
 				"name"		=> "userID",
 				"type"		=> "int",
 				"field"		=> "userID",
-				"required" 	=> false,
+				"required" 	=> true,
 				"relation"	=> array(
 					"class"		=> "User",
-					"field"		=> "spotifyID"
+					"field"		=> "id"
 				)
 			),
 		);
@@ -39,7 +39,7 @@ class Playlist extends Thing {
 			"userID" => array(
 				"class"		=> "User",
 				"table"		=> "User",
-				"field"		=> "spotifyID"
+				"field"		=> "id"
 			),
 		);
 

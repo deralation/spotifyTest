@@ -29,7 +29,7 @@ class Track extends Thing{
 				"name"		=> "playlistID",
 				"type"		=> "int",
 				"field"		=> "playlistID",
-				"required" 	=> false,
+				"required" 	=> true,
 				"relation"	=> array(
 					"class"		=> "Playlist",
 					"field"		=> "id"
