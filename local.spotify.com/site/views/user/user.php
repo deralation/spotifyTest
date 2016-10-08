@@ -13,6 +13,7 @@ if(isset($array)){
     $member["spotifyID"] = $array["id"];
     $member["displayName"] = $array["display_name"];
     $member["accessToken"] = $array["accessToken"];
+    $member["creationDate"] = date("Y-m-d H:i:s");
 
     if($user->add($member))
         echo "Spotify User added to Database.";

@@ -35,7 +35,13 @@ class User extends Thing {
 				"type"		=> "int",
 				"field"		=> "spotifyID",
 				"required"	=> true	
-				)
+			),
+			"creationDate" => array(
+				"name"		=> "creationDate",
+				"type"		=> "datetime",
+				"field"		=> "createDate",
+				"required"  => false
+			),
 		);
 		global $database;
 		$database->setCaching(true);
