@@ -39,7 +39,7 @@ class User extends Thing {
 			"creationDate" => array(
 				"name"		=> "creationDate",
 				"type"		=> "datetime",
-				"field"		=> "createDate",
+				"field"		=> "creationDate",
 				"required"  => false
 			),
 		);

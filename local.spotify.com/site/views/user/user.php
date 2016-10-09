@@ -1,20 +1,44 @@
 <?php  
 require_once(__DIR__.'/../../config/config.php');
-$api = new SpotifyWebAPI\SpotifyWebAPI();
 
+echo "<pre>";
+
+$session = new SpotifyWebAPI\Session(SPOTIFYCLIENTID, SPOTIFYCLIENTSECRET, 'http://local.spotify.com/views/user/user.php');
+
+$api = new SpotifyWebAPI\SpotifyWebAPI();
 $user = new User();
+
+if (isset($_GET['code'])) {
+    $session->requestAccessToken($_GET['code']);
+    $accessToken = $session->getAccessToken();
+    $api->setAccessToken($session->getAccessToken());
+} else {
+    header('Location: ' . $session->getAuthorizeUrl(array(
+        'scope' => array(
+            'user-follow-modify',
+            'user-follow-read',
+            'user-read-email',
+            'user-read-private',
+        )
+    )));
+    die();
+}
+
 $me = $api->me();
 $array = json_decode(json_encode($me), True);
-var_dump($api); exit();
+var_dump($array);
+var_dump($accessToken);
 
 $member = array();
 
 if(isset($array)){
     $member["spotifyID"] = $array["id"];
     $member["displayName"] = $array["display_name"];
-    $member["accessToken"] = $array["accessToken"];
+    $member["accessToken"] = $accessToken;
     $member["creationDate"] = date("Y-m-d H:i:s");
 
+    var_dump($member);
+    
     if($user->add($member))
         echo "Spotify User added to Database.";
 }
