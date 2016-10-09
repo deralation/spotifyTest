@@ -26,8 +26,6 @@ if (isset($_GET['code'])) {
 
 $me = $api->me();
 $array = json_decode(json_encode($me), True);
-var_dump($array);
-var_dump($accessToken);
 
 $member = array();
 
@@ -36,8 +34,6 @@ if(isset($array)){
     $member["displayName"] = $array["display_name"];
     $member["accessToken"] = $accessToken;
     $member["creationDate"] = date("Y-m-d H:i:s");
-
-    var_dump($member);
     
     if($user->add($member))
         echo "Spotify User added to Database.";

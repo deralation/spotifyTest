@@ -22,29 +22,4 @@ if (isset($_GET['code'])) {
     die();
 }
 
-
-
-/*$tracksRequest = $api->getUserPlaylistTracks($array["id"], $key["id"]);
-$playlistTracks = json_decode(json_encode($tracksRequest), True);
-
-$tracks = array();
-
-foreach ($tracksRequest->items as $value) {
-$value = $value->track;
-
-$tracks["trackName"] = '<a href="' . $value->external_urls->spotify . '">' . $value->name . '</a> <br>';
-$tracks["playlistID"] = $key["id"];
-
-if($track->add($tracks))
-    echo "Spotify Playlists Track added to Databases.";
-}*/
-
-// Request a access token using the code from Spotify
-/*$session->requestAccessToken($_GET['code']);
-$accessToken = $session->getAccessToken();
-
-var_dump($accessToken); exit();
-
-// Set the access token on the API wrapper
-$api->setAccessToken($accessToken);*/
 ?>

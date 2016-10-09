@@ -35,6 +35,13 @@ class Track extends Thing{
 					"field"		=> "id"
 				)
 			),
+
+			"creationDate" => array(
+				"name"		=> "creationDate",
+				"type"		=> "datetime",
+				"field"		=> "creationDate",
+				"required"  => false
+			),
 		);
 		$this->relations = array(
 			"playlistID" => array(
